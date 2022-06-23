@@ -37,7 +37,7 @@ const updateMarketcap = async () => {
         lockedHolders.map(async (address) => {
             const account = await near.account(address);
             const ft_balance = await account.viewFunction(tokenContractName, 'ft_balance_of', {account_id: address})
-            const parsedBalance = Number(ft_balance)/Math.pow(10,18);
+            const parsedBalance = Number(ft_balance)/Math.pow(10,24);
             return {
                 address,
                 balance: parsedBalance,
