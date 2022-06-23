@@ -4,11 +4,11 @@ const nearAPI = require('near-api-js');
 const config = getConfig(process.env.NODE_ENV || 'production');
 
 // token account  
-let brrrToken = 'token.burrow.near';
+let brrrToken = 'token.cheddar.near';
 // set all accounts with locked tokens
-const brrrLockedHolders = ['lockup.burrow.near', 'burrow.sputnik-dao.near'];
+const brrrLockedHolders = ['cheddar.sputnik-dao.near', 'team.cheddar.near','contributors.cheddar.near'];
 // token max supply
-const maxSupply = Math.pow(10, 9);
+const maxSupply = "2300000";
 
 const getTokenPrice = async (tokenId) => {
     return fetch("https://indexer.ref-finance.net/list-token-price")
@@ -27,7 +27,7 @@ const updateMarketcap = async () => {
         lastUpdate: 0
     }
 
-    let tokenPrice = await getTokenPrice("token.burrow.near");
+    let tokenPrice = await getTokenPrice(brrrToken);
     const near = await nearAPI.connect(config);
 
     const lockedBalances = await Promise.all(
