@@ -1,14 +1,20 @@
+import { NEP141Trait } from './contracts/NEP141';
+
 const {getConfig} = require('./near');
 const nearAPI = require('near-api-js');
 
 const config = getConfig(process.env.NODE_ENV || 'production');
 
 // token account  
-let brrrToken = 'token.cheddar.near';
+let tokenContractName = 'token.cheddar.near';
 // set all accounts with locked tokens
 const brrrLockedHolders = ['cheddar.sputnik-dao.near', 'team.cheddar.near','contributors.cheddar.near'];
 // token max supply
-const maxSupply = "2300000";
+const maxSupply = Math.pow(10, 24);
+let tokenContract: NEP141Trait;
+tokenContract = new NEP141Trait(tokenContractName);
+
+
 
 const getTokenPrice = async (tokenId) => {
     return fetch("https://indexer.ref-finance.net/list-token-price")
