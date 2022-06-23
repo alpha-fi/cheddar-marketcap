@@ -6,7 +6,7 @@ const config = getConfig(process.env.NODE_ENV || 'production');
 // token account  
 let tokenContractName = 'token.cheddar.near';
 // set all accounts with locked tokens
-const brrrLockedHolders = ['cheddar.sputnik-dao.near', 'team.cheddar.near','contributors.cheddar.near'];
+const lockedHolders = ['cheddar.sputnik-dao.near', 'team.cheddar.near','contributors.cheddar.near'];
 // token max supply
 const maxSupply = Math.pow(10, 24);
 
@@ -27,16 +27,16 @@ const updateMarketcap = async () => {
         lastUpdate: 0
     }
 
-    let tokenPrice = await getTokenPrice(brrrToken);
+    let tokenPrice = await getTokenPrice(tokenContractName);
     const near = await nearAPI.connect(config);
     
     const accountSupply = await near.account('team.cheddar.near');
     const total_supply = await accountSupply.viewFunction(tokenContractName, 'ft_total_supply')/Math.pow(10,24);
 
     const lockedBalances = await Promise.all(
-        brrrLockedHolders.map(async (address) => {
+        lockedHolders.map(async (address) => {
             const account = await near.account(address);
-            const ft_balance = await account.viewFunction(brrrToken, 'ft_balance_of', {account_id: address})
+            const ft_balance = await account.viewFunction(tokenContractName, 'ft_balance_of', {account_id: address})
             const parsedBalance = Number(ft_balance)/Math.pow(10,18);
             return {
                 address,
