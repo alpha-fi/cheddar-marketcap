@@ -1,5 +1,3 @@
-import { NEP141Trait } from './contracts/NEP141';
-
 const {getConfig} = require('./near');
 const nearAPI = require('near-api-js');
 
@@ -11,10 +9,6 @@ let tokenContractName = 'token.cheddar.near';
 const brrrLockedHolders = ['cheddar.sputnik-dao.near', 'team.cheddar.near','contributors.cheddar.near'];
 // token max supply
 const maxSupply = Math.pow(10, 24);
-let tokenContract: NEP141Trait;
-tokenContract = new NEP141Trait(tokenContractName);
-
-
 
 const getTokenPrice = async (tokenId) => {
     return fetch("https://indexer.ref-finance.net/list-token-price")
@@ -35,6 +29,9 @@ const updateMarketcap = async () => {
 
     let tokenPrice = await getTokenPrice(brrrToken);
     const near = await nearAPI.connect(config);
+    
+    const accountSupply = await near.account('team.cheddar.near');
+    const total_supply = await accountSupply.viewFunction(tokenContractName, 'ft_total_supply')/Math.pow(10,24);
 
     const lockedBalances = await Promise.all(
         brrrLockedHolders.map(async (address) => {
@@ -52,7 +49,7 @@ const updateMarketcap = async () => {
     const circulatingSupply = maxSupply-sumLocked;
     if(!isNaN(circulatingSupply)) {
         marketCap.lockedBalances = lockedBalances;
-        marketCap.circulatingSupply = circulatingSupply;
+        marketCap.circulatingSupply = total_supply;
         marketCap.lastUpdate = new Date().getTime();
     }
 
