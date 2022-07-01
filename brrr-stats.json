@@ -3,15 +3,19 @@
     {
       address: 'cheddar.sputnik-dao.near',
       balance: 933759.8065000001,
-      value: 5003.355833570885
+      value: 5018.38002885747
     },
-    { address: 'team.cheddar.near', balance: 300000, value: 1607.487 },
+    {
+      address: 'team.cheddar.near',
+      balance: 300000,
+      value: 1612.3139999999999
+    },
     {
       address: 'contributors.cheddar.near',
       balance: 89661.47597092687,
-      value: 480.4321900802577
+      value: 481.8748432286299
     }
   ],
   circulatingSupply: 7116553.276475582,
-  lastUpdate: 1656669260803
+  lastUpdate: 1656670153283
 }
