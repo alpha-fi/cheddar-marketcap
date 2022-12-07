@@ -8,10 +8,10 @@
     { address: 'team.cheddar.near', balance: 300000, value: 0 },
     {
       address: 'contributors.cheddar.near',
-      balance: 66648.47580020927,
+      balance: 66408.47580020927,
       value: 0
     }
   ],
   circulatingSupply: 9195405.485075396,
-  lastUpdate: 1670370723624
+  lastUpdate: 1670373631135
 }
