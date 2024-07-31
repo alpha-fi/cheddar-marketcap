@@ -5,11 +5,11 @@ on:
    schedule:
      - cron:  '*/10 * * * *'
 
-# jobs:
-  # updateStats:
-    # runs-on: ubuntu-latest
-    # steps:
-      # - uses: actions/checkout@v3
+jobs:
+   updateStats:
+     runs-on: ubuntu-latest
+     steps:
+       - uses: actions/checkout@v3
       # - name: Prepare        
       #   uses: actions/setup-node@v3
       #   with:
