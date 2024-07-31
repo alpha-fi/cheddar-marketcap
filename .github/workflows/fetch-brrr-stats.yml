@@ -1,25 +1,25 @@
 name: Fetch Brrr Stats
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron:  '*/10 * * * *'
+   workflow_dispatch:
+   schedule:
+     - cron:  '*/10 * * * *'
 
-jobs:
-  updateStats:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Prepare        
-        uses: actions/setup-node@v3
-        with:
-            node-version: 16
-      - run: npm i      
-      - name: Update stats
-        run: node marketcap > brrr-stats.json              
-      - uses: EndBug/add-and-commit@v9 
-        with: 
-          author_name: "Brrr Stats Updater"
-          author_email: "support@zavodil.ru"
-          add: 'brrr-stats.json --force'
-          message: "Stats fetching"
+# jobs:
+  # updateStats:
+    # runs-on: ubuntu-latest
+    # steps:
+      # - uses: actions/checkout@v3
+      # - name: Prepare        
+      #   uses: actions/setup-node@v3
+      #   with:
+      #       node-version: 16
+      # - run: npm i      
+      # - name: Update stats
+      #   run: node marketcap > brrr-stats.json              
+      # - uses: EndBug/add-and-commit@v9 
+       #  with: 
+          # author_name: "Brrr Stats Updater"
+          # author_email: "support@zavodil.ru"
+          # add: 'brrr-stats.json --force'
+          # message: "Stats fetching"
